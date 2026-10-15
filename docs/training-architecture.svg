@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="460" viewBox="0 0 980 460">
+  <rect width="980" height="460" rx="12" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#1e7a46"/>
+    </marker>
+  </defs>
+
+  <text x="28" y="32" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">FORWARD</text>
+
+  <rect x="28" y="52" width="110" height="46" rx="8" fill="#f4f4f5" stroke="#3f3f46"/>
+  <text x="83" y="80" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#18181b">Image</text>
+
+  <rect x="190" y="28" width="160" height="46" rx="8" fill="#e8f1fb" stroke="#1d4e89"/>
+  <text x="270" y="56" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1d4e89">Student CNN</text>
+
+  <rect x="190" y="96" width="160" height="46" rx="8" fill="#eef8f1" stroke="#1e7a46"/>
+  <text x="270" y="124" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1e7a46">EMA self-teacher</text>
+
+  <rect x="400" y="28" width="190" height="46" rx="8" fill="#e8f1fb" stroke="#1d4e89"/>
+  <text x="495" y="56" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1d4e89">Standardize logits</text>
+
+  <rect x="400" y="96" width="190" height="46" rx="8" fill="#eef8f1" stroke="#1e7a46"/>
+  <text x="495" y="124" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1e7a46">Standardize logits</text>
+
+  <rect x="650" y="62" width="150" height="46" rx="8" fill="#fff6e8" stroke="#b86e00"/>
+  <text x="725" y="90" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#9a5b00">Decoupled KL</text>
+
+  <line x1="138" y1="68" x2="186" y2="51" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="138" y1="82" x2="186" y2="119" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="350" y1="51" x2="396" y2="51" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="350" y1="119" x2="396" y2="119" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="590" y1="51" x2="646" y2="78" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="590" y1="119" x2="646" y2="92" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <rect x="28" y="196" width="130" height="46" rx="8" fill="#f4f4f5" stroke="#3f3f46"/>
+  <text x="93" y="224" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#18181b">Class label</text>
+
+  <rect x="210" y="196" width="160" height="46" rx="8" fill="#f4f4f5" stroke="#3f3f46"/>
+  <text x="290" y="224" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#18181b">Label smoothing</text>
+
+  <rect x="420" y="196" width="190" height="46" rx="8" fill="#fff6e8" stroke="#b86e00"/>
+  <text x="515" y="224" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#9a5b00">Smoothed CE</text>
+
+  <rect x="680" y="186" width="250" height="66" rx="8" fill="#fff6e8" stroke="#b86e00"/>
+  <text x="805" y="214" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#9a5b00">Total loss</text>
+  <text x="805" y="234" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#9a5b00">CE + weight x decoupled KL</text>
+
+  <line x1="158" y1="219" x2="206" y2="219" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="370" y1="219" x2="416" y2="219" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="610" y1="219" x2="676" y2="219" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="725" y1="108" x2="725" y2="186" stroke="#334155" stroke-width="1.6"/>
+  <line x1="725" y1="186" x2="676" y2="210" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <text x="28" y="308" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#64748b">UPDATE</text>
+
+  <rect x="680" y="328" width="250" height="52" rx="8" fill="#e8f1fb" stroke="#1d4e89"/>
+  <text x="805" y="350" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1d4e89">SGD step</text>
+  <text x="805" y="368" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1d4e89">student weights only</text>
+
+  <rect x="360" y="328" width="250" height="52" rx="8" fill="#eef8f1" stroke="#1e7a46"/>
+  <text x="485" y="350" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#1e7a46">EMA mix</text>
+  <text x="485" y="368" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1e7a46">teacher lags the student</text>
+
+  <line x1="805" y1="252" x2="805" y2="324" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="680" y1="354" x2="614" y2="354" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <path d="M360 380 V408 H16 V150 H250 V142" fill="none" stroke="#1e7a46" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow-green)"/>
+
+  <text x="28" y="430" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#64748b">The teacher is a copy of the student. It is not a larger pretrained network, and it receives no gradients.</text>
+</svg>

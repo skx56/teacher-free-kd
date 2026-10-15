@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="390" viewBox="0 0 980 390">
+  <rect width="980" height="390" rx="12" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <line x1="78" y1="48" x2="78" y2="330" stroke="#cbd5e1" stroke-width="2"/>
+
+  <circle cx="78" cy="56" r="16" fill="#1d4e89"/>
+  <text x="78" y="61" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">1</text>
+  <text x="112" y="52" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#18181b">Student forward</text>
+  <text x="112" y="72" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#475569">The image goes through the student. Gradients will flow from this pass.</text>
+
+  <circle cx="78" cy="124" r="16" fill="#1e7a46"/>
+  <text x="78" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">2</text>
+  <text x="112" y="120" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#18181b">Teacher forward, after warmup</text>
+  <text x="112" y="140" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#475569">The same image goes through the EMA copy. This pass is under no_grad.</text>
+
+  <circle cx="78" cy="192" r="16" fill="#b86e00"/>
+  <text x="78" y="197" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">3</text>
+  <text x="112" y="188" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#18181b">Loss</text>
+  <text x="112" y="208" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Smoothed cross-entropy always. Decoupled KL only after the warmup epochs.</text>
+
+  <circle cx="78" cy="260" r="16" fill="#1d4e89"/>
+  <text x="78" y="265" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">4</text>
+  <text x="112" y="256" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#18181b">SGD</text>
+  <text x="112" y="276" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Nesterov SGD updates the student. The teacher parameters stay frozen.</text>
+
+  <circle cx="78" cy="328" r="16" fill="#1e7a46"/>
+  <text x="78" y="333" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#ffffff">5</text>
+  <text x="112" y="324" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#18181b">EMA update</text>
+  <text x="112" y="344" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#475569">teacher = 0.999 * teacher + 0.001 * student, including floating-point buffers.</text>
+</svg>

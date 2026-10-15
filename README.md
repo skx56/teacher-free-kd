@@ -6,23 +6,7 @@ There is one student. The teacher is a copy of that student, not a larger model.
 
 ## Training architecture
 
-```mermaid
-flowchart LR
-  image[Image] --> student[Student CNN]
-  image --> teacher[EMA self-teacher]
-  label[Class label] --> smooth[Label smoothing]
-  student --> zS[Standardize student logits]
-  teacher --> zT[Standardize teacher logits]
-  zS --> dkd[Decoupled KL]
-  zT --> dkd
-  student --> ce[Smoothed cross-entropy]
-  smooth --> ce
-  ce --> total[Total loss]
-  dkd --> total
-  total --> update[SGD step on the student]
-  update -.-> ema[EMA update]
-  ema -.-> teacher
-```
+<img src="docs/training-architecture.png" alt="Training architecture. The image feeds the student and the EMA self-teacher. Smoothed cross-entropy and the decoupled KL add into the total loss. SGD updates only the student, then an EMA mix updates the teacher." width="980">
 
 The teacher is in eval mode and receives no gradients. After the student optimizer step, every floating-point parameter and buffer is mixed into the teacher:
 
@@ -36,20 +20,7 @@ For the first warmup epochs the distillation weight is zero. The student learns 
 
 ## Loss
 
-```mermaid
-flowchart TD
-  logits[Student and teacher logits] --> norm[Per-sample z-score]
-  norm --> temp[Divide by temperature]
-  temp --> binary[Target class vs the rest]
-  temp --> other[Distribution over the other classes]
-  binary --> tckd[Target-class KL]
-  other --> nckd[Non-target KL]
-  tckd --> soft["alpha * TCKD + beta * NCKD"]
-  hard[One-hot label] --> ls[Label smoothing]
-  ls --> ce[Cross-entropy]
-  ce --> sum[Total loss]
-  soft --> sum
-```
+<img src="docs/loss.png" alt="Loss. Logits are z-scored and divided by temperature, then split into a target-class KL and a non-target KL. That soft loss is added to smoothed cross-entropy." width="980">
 
 The total loss is
 
@@ -78,25 +49,7 @@ A baseline with the same optimizer and label smoothing, and no self-teacher, is 
 
 ## One training step
 
-```mermaid
-sequenceDiagram
-  participant Data
-  participant Student
-  participant Teacher as EMA teacher
-  participant Loss
-  participant SGD
-  Data->>Student: image
-  Student->>Loss: student logits
-  alt after warmup
-    Data->>Teacher: same image
-    Teacher->>Loss: teacher logits, no grad
-    Loss->>SGD: smoothed CE + decoupled KL
-  else warmup
-    Loss->>SGD: smoothed CE only
-  end
-  SGD->>Student: parameter update
-  Student->>Teacher: EMA mix
-```
+<img src="docs/training-step.png" alt="One training step. Student forward, EMA teacher forward after warmup, loss, SGD on the student, then the EMA mix." width="980">
 
 Evaluation uses the student, not the EMA. Top-1 accuracy is the fraction of validation images whose highest logit matches the label. `checkpoints/best.pt` stores the student, the EMA, the accuracy, and the arguments for the best epoch. `checkpoints/last.pt` is the latest epoch.
 
@@ -118,16 +71,7 @@ ImageNet keeps the standard stem: a stride-2 first convolution, and a max-pool o
 
 A 32x32 image cannot spare the ImageNet stem. That stem is a 7x7 stride-2 convolution plus a stride-2 max-pool, which would shrink the map to 8x8 before the residual stages. The CIFAR stem is a 3x3 stride-1 convolution and no max-pool. Spatial size through the residual stages:
 
-```mermaid
-flowchart LR
-  input["32x32"] --> stem["3x3 stride 1"]
-  stem --> s1["stage 1, stride 1, 32x32"]
-  s1 --> s2["stage 2, stride 2, 16x16"]
-  s2 --> s3["stage 3, stride 2, 8x8"]
-  s3 --> s4["stage 4, stride 2, 4x4"]
-  s4 --> pool["global pool"]
-  pool --> fc["linear classifier"]
-```
+<img src="docs/cifar-resnet.png" alt="CIFAR ResNet spatial path. A 32 by 32 image goes through a 3 by 3 stride-1 stem, then four stages ending at 4 by 4, then global pool and the classifier." width="980">
 
 ResNet-18 uses two basic blocks per stage. ResNet-50 and ResNeXt-50 use bottleneck blocks. ResNeXt replaces the middle 3x3 convolution with 32 groups.
 
